@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.doo.academy.dy.model.ps.PublicContest;
 import com.doo.academy.dy.pc.repository.DyPc00Repository;
 
 @SpringBootTest

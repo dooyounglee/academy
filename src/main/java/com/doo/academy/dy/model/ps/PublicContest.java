@@ -1,4 +1,4 @@
-package com.doo.academy.dy.model;
+package com.doo.academy.dy.model.ps;
 
 import java.io.Serializable;
 
@@ -22,13 +22,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString(callSuper = true) // 부모 클래스에 필드를 포함하는 역할
 @EqualsAndHashCode(callSuper = true) // 부모 클래스에 필드를 포함하는 역할
-@Entity(name = "DYPC002M")
+@Entity
 @Table(name = "DYPC001M")
 @IdClass(PublicContestPK.class)
 public class PublicContest extends BaseEntity implements Serializable {
 
 	@Id private int yr; /*공모년도*/
-	@Id private int sn;    /*공모회차*/
+	@Id private int sn; /*공모회차*/
 	
 	private String title;
 	private String description;
