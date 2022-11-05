@@ -2,14 +2,13 @@ package com.doo.academy.dy.model.pb;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.doo.academy.dy.model.base.BaseEntity;
+import com.doo.academy.dy.model.base.MasterEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +23,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true) // 부모 클래스에 필드를 포함하는 역할
 @Entity
 @Table(name = "DYPB001M")
-public class Problem extends BaseEntity implements Serializable {
+public class Problem extends MasterEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +33,7 @@ public class Problem extends BaseEntity implements Serializable {
 	private String solution;
 	private String answer;
 	
-	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'")
-	private String delYn;
+	
 	
 	private static final long serialVersionUID = 1L;
 }

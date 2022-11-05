@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PublicContestPK implements Serializable {
+public class ContestPK implements Serializable {
 
 	private int yr;
 	private int sn;

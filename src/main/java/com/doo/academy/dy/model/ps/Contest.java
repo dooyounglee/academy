@@ -2,14 +2,13 @@ package com.doo.academy.dy.model.ps;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import com.doo.academy.dy.model.base.BaseEntity;
-import com.doo.academy.dy.model.pk.PublicContestPK;
+import com.doo.academy.dy.model.base.MasterEntity;
+import com.doo.academy.dy.model.pk.ContestPK;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +23,8 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true) // 부모 클래스에 필드를 포함하는 역할
 @Entity
 @Table(name = "DYPC001M")
-@IdClass(PublicContestPK.class)
-public class PublicContest extends BaseEntity implements Serializable {
+@IdClass(ContestPK.class)
+public class Contest extends MasterEntity implements Serializable {
 
 	@Id private int yr; /*공모년도*/
 	@Id private int sn; /*공모회차*/
@@ -33,8 +32,6 @@ public class PublicContest extends BaseEntity implements Serializable {
 	private String title;
 	private String description;
 	
-	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'")
-	private String delYn;
 	
 	
 	private static final long serialVersionUID = 1L;
