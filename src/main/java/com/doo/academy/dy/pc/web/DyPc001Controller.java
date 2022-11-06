@@ -21,18 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "*")
 public class DyPc001Controller {
 	
 	private final DyPc001Service dyPc001Service;
 	
-	@CrossOrigin(originPatterns = "*")
 	@RequestMapping(value = "/v1/api/dypc/list", method = RequestMethod.GET)
 	public ResponseEntity<List<Contest>> list() {
 		
 		return new ResponseEntity<>(dyPc001Service.findAll(), HttpStatus.OK);
 	}
 	
-	@CrossOrigin(originPatterns = "*")
 	@RequestMapping(value = "/v1/api/dypc/get", method = RequestMethod.POST)
 	public ResponseEntity<Contest> get(@RequestBody Contest contest) {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.get.contest : {}", contest);
@@ -45,7 +44,6 @@ public class DyPc001Controller {
 		return new ResponseEntity<>(oContest.get(), HttpStatus.OK);
 	}
 	
-	@CrossOrigin(originPatterns = "*")
 	@RequestMapping(value = "/v1/api/dypc/save", method = RequestMethod.POST)
 	public ResponseEntity<Contest> save(@RequestBody Contest contest) {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.save.contest : {}", contest);
@@ -55,7 +53,6 @@ public class DyPc001Controller {
 		return new ResponseEntity<>(dyPc001Service.save(contest), HttpStatus.OK);
 	}
 	
-	@CrossOrigin(originPatterns = "*")
 	@RequestMapping(value = "/v1/api/dypc/delete", method = RequestMethod.POST)
 	public ResponseEntity<Contest> delete(@RequestBody Contest contest) {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.delete.contest : {}", contest);
