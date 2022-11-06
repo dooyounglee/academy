@@ -60,7 +60,7 @@ public class DyPc001Controller {
 	public ResponseEntity<Contest> delete(@RequestBody Contest contest) {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.delete.contest : {}", contest);
 		
-		dyPc001Service.delete(contest.getYr(),contest.getSn());
+		dyPc001Service.delete(new ContestPK(contest.getYr(), contest.getSn()));
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
