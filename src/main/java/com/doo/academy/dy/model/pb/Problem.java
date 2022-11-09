@@ -32,6 +32,7 @@ public class Problem extends MasterEntity implements Serializable {
 	private String question;
 	private String solution;
 	private String answer;
+	private String variables;
 	
 	
 	

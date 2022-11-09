@@ -26,7 +26,7 @@ public class DyPc001Controller {
 	
 	private final DyPc001Service dyPc001Service;
 	
-	@RequestMapping(value = "/v1/api/dypc/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/api/dypc/list", method = RequestMethod.POST)
 	public ResponseEntity<List<Contest>> list() {
 		
 		return new ResponseEntity<>(dyPc001Service.findAll(), HttpStatus.OK);
