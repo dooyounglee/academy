@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.doo.academy.dy.model.base.MasterEntity;
@@ -29,6 +30,7 @@ public class Problem extends MasterEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long problemNo; /*문제번호*/
 	
+	@Lob
 	private String question;
 	private String solution;
 	private String answer;
