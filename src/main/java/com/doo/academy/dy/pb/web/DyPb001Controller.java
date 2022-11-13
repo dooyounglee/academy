@@ -25,17 +25,17 @@ public class DyPb001Controller {
 	
 	private final DyPb001Service dyPb001Service;
 	
-	@RequestMapping(value = "/v1/api/dypb/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/v1/api/dypb001/list", method = RequestMethod.POST)
 	public ResponseEntity<List<Problem>> list() {
 		
 		return new ResponseEntity<>(dyPb001Service.findAll(), HttpStatus.OK);
 	}
 	
 	/**
-	 * @param contest
+	 * @param problem
 	 * @return
 	 */
-	@RequestMapping(value = "/v1/api/dypb/get", method = RequestMethod.POST)
+	@RequestMapping(value = "/v1/api/dypb001/get", method = RequestMethod.POST)
 	public ResponseEntity<Problem> get(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.get.problem : {}", problem);
 		
@@ -47,7 +47,7 @@ public class DyPb001Controller {
 		return new ResponseEntity<>(oProblem.get(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/v1/api/dypb/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/v1/api/dypb001/save", method = RequestMethod.POST)
 	public ResponseEntity<Problem> save(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.save.problem : {}", problem);
 		
@@ -56,7 +56,7 @@ public class DyPb001Controller {
 		return new ResponseEntity<>(dyPb001Service.save(problem), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/v1/api/dypb/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/v1/api/dypb001/delete", method = RequestMethod.POST)
 	public ResponseEntity<Problem> delete(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.delete.problem : {}", problem);
 		
