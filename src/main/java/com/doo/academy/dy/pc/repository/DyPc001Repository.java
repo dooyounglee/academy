@@ -9,7 +9,7 @@ import com.doo.academy.dy.model.pk.ContestPK;
 import com.doo.academy.dy.model.ps.Contest;
 
 @Repository
-public interface DyPc001Repository extends JpaRepository<Contest, ContestPK>{
+public interface DyPc001Repository extends JpaRepository<Contest, ContestPK> {
 
 	@Query("select max(u.sn) from Contest u where u.yr = :yr")
 	int getSnMax(@Param("yr") int yr);
