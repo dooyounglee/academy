@@ -1,11 +1,14 @@
 package com.doo.academy.dy.us.web;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doo.academy.dy.model.dto.ReturnDto;
 import com.doo.academy.dy.model.dto.SignDto;
 import com.doo.academy.dy.model.us.User;
 import com.doo.academy.dy.us.service.DyUs001Service;
@@ -49,6 +53,24 @@ public class DyUs001Controller {
 
         log.info("[signUp] 회원가입을 완료했습니다. email : {}", user.getEmail());
         return new ResponseEntity<SignDto>(signDto, HttpStatus.OK);
+    }
+    
+    @PostMapping(value = "/v1/api/dyus001/myinfo")
+    public ResponseEntity<ReturnDto> myinfo(@RequestBody User user) {
+    	log.debug("myinfo");
+    	Collection<? extends GrantedAuthority> list = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+    	log.debug("list : {}", list);
+    	
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("role", list);
+    	
+    	ReturnDto returnMap = ReturnDto.builder()
+    			.code(0)
+    			.success(true)
+    			.returnMap(map)
+    			.build();
+    			
+        return new ResponseEntity<ReturnDto>(returnMap, HttpStatus.OK);
     }
 
     @GetMapping(value = "/v1/api/dyus001/exception")
