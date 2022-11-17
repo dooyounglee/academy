@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -49,6 +50,7 @@ public class User extends MasterEntity implements UserDetails {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
+    @CollectionTable(name="DYUS002D")
     private List<String> roles = new ArrayList<>();
 	
 	@Transient
