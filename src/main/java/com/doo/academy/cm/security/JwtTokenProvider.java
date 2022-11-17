@@ -46,9 +46,9 @@ public class JwtTokenProvider {
 
     // 예제 13.12
     // JWT 토큰 생성
-    public String createToken(String userUid, List<String> roles) {
+    public String createToken(String email, List<String> roles) {
         LOGGER.info("[createToken] 토큰 생성 시작");
-        Claims claims = Jwts.claims().setSubject(userUid);
+        Claims claims = Jwts.claims().setSubject(email);
         claims.put("roles", roles);
 
         Date now = new Date();
