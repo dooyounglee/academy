@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.doo.academy.dy.model.dto.ReturnDto;
+import com.doo.academy.cm.exception.CustomException;
+import com.doo.academy.cm.model.dto.ResponseDto;
 import com.doo.academy.dy.model.dto.SignDto;
 import com.doo.academy.dy.model.us.User;
 import com.doo.academy.dy.us.service.DyUs001Service;
@@ -33,7 +34,7 @@ public class DyUs001Controller {
 	private final DyUs001Service dyUs001Service;
 	
 	@PostMapping(value = "/v1/api/dyus001/signin")
-    public ResponseEntity<SignDto> signIn(@RequestBody User user)
+    public ResponseEntity<ResponseDto> signIn(@RequestBody User user)
         throws RuntimeException {
         log.info("[signIn] 로그인을 시도하고 있습니다. user : {}", user);
         
@@ -43,20 +44,31 @@ public class DyUs001Controller {
             log.info("[signIn] 정상적으로 로그인되었습니다. email : {}, token : {}", user.getEmail(),
             		signDto.getToken());
         }
-        return new ResponseEntity<SignDto>(signDto, HttpStatus.OK);
+        
+        ResponseDto responseDto = ResponseDto.builder()
+        		.code(0)
+        		.success(true)
+        		.returnObject(signDto.getToken())
+        		.build();
+        return new ResponseEntity<ResponseDto>(responseDto, HttpStatus.OK);
     }
 
     @PostMapping(value = "/v1/api/dyus001/signup")
-    public ResponseEntity<SignDto> signUp(@RequestBody User user) {
+    public ResponseEntity<ResponseDto> signUp(@RequestBody User user) throws CustomException {
         log.info("[signUp] 회원가입을 수행합니다. user : {}", user);
         SignDto signDto = dyUs001Service.signUp(user);
 
         log.info("[signUp] 회원가입을 완료했습니다. email : {}", user.getEmail());
-        return new ResponseEntity<SignDto>(signDto, HttpStatus.OK);
+        
+        ResponseDto responseDto = ResponseDto.builder()
+        		.code(signDto.getCode())
+        		.success(true)
+        		.build();
+        return new ResponseEntity<ResponseDto>(responseDto, HttpStatus.OK);
     }
     
     @PostMapping(value = "/v1/api/dyus001/myinfo")
-    public ResponseEntity<ReturnDto> myinfo(@RequestBody User user) {
+    public ResponseEntity<ResponseDto> myinfo(@RequestBody User user) throws CustomException {
     	log.debug("myinfo");
     	Collection<? extends GrantedAuthority> list = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
     	log.debug("list : {}", list);
@@ -64,13 +76,12 @@ public class DyUs001Controller {
     	Map<String, Object> map = new HashMap<>();
     	map.put("role", list);
     	
-    	ReturnDto returnMap = ReturnDto.builder()
-    			.code(0)
-    			.success(true)
-    			.returnMap(map)
-    			.build();
-    			
-        return new ResponseEntity<ReturnDto>(returnMap, HttpStatus.OK);
+    	ResponseDto responseDto = ResponseDto.builder()
+        		.code(0)
+        		.success(true)
+        		.returnObject(list)
+        		.build();
+        return new ResponseEntity<ResponseDto>(responseDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/v1/api/dyus001/exception")

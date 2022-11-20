@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doo.academy.cm.exception.CustomException;
 import com.doo.academy.dy.model.pk.ContestPK;
 import com.doo.academy.dy.model.ps.Contest;
 import com.doo.academy.dy.pc.service.DyPc001Service;
@@ -33,7 +34,7 @@ public class DyPc001Controller {
 	}
 	
 	@RequestMapping(value = "/v1/api/dypc/get", method = RequestMethod.POST)
-	public ResponseEntity<Contest> get(@RequestBody Contest contest) {
+	public ResponseEntity<Contest> get(@RequestBody Contest contest) throws CustomException {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.get.contest : {}", contest);
 		
 		Optional<Contest> oContest = dyPc001Service.findById(new ContestPK(contest.getYr(), contest.getSn()));
@@ -45,7 +46,7 @@ public class DyPc001Controller {
 	}
 	
 	@RequestMapping(value = "/v1/api/dypc/save", method = RequestMethod.POST)
-	public ResponseEntity<Contest> save(@RequestBody Contest contest) {
+	public ResponseEntity<Contest> save(@RequestBody Contest contest) throws CustomException {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.save.contest : {}", contest);
 		
 		dyPc001Service.save(contest);
@@ -54,7 +55,7 @@ public class DyPc001Controller {
 	}
 	
 	@RequestMapping(value = "/v1/api/dypc/delete", method = RequestMethod.POST)
-	public ResponseEntity<Contest> delete(@RequestBody Contest contest) {
+	public ResponseEntity<Contest> delete(@RequestBody Contest contest) throws CustomException {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.delete.contest : {}", contest);
 		
 		dyPc001Service.delete(new ContestPK(contest.getYr(), contest.getSn()));

@@ -1,6 +1,4 @@
-package com.doo.academy.dy.model.dto;
-
-import java.util.Map;
+package com.doo.academy.cm.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,9 +11,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ReturnDto {
+public class ResponseDto {
 
 	private boolean success;
 	private int code;
-	private Map<String, Object> returnMap;
+	private String msg;
+	private Object returnObject;
 }
