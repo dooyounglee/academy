@@ -49,8 +49,6 @@ public class DyPc001Controller {
 	public ResponseEntity<Contest> save(@RequestBody Contest contest) throws CustomException {
 		log.debug("com.doo.academy.dy.pc.web.DyPc001Controller.save.contest : {}", contest);
 		
-		dyPc001Service.save(contest);
-		
 		return new ResponseEntity<>(dyPc001Service.save(contest), HttpStatus.OK);
 	}
 	
