@@ -21,7 +21,6 @@ public class DyPb001RepositoryTest {
 	@BeforeAll
 	public void setup() {
 		Problem problem = new Problem();
-		problem.setProblemNo(101L);
 		problem.setQuestion("question101");
 		problem.setAnswer("answer101");
 		problem.setSolution("solution101");
