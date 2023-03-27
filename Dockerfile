@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM gostbaducking1/academy:latest
 
 EXPOSE 8080
 
