@@ -1,6 +1,5 @@
 package com.doo.academy.dy.pb.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doo.academy.cm.model.dto.ResponseDto;
 import com.doo.academy.dy.model.pb.Problem;
 import com.doo.academy.dy.pb.service.DyPb001Service;
 
@@ -26,9 +26,14 @@ public class DyPb001Controller {
 	private final DyPb001Service dyPb001Service;
 	
 	@RequestMapping(value = "/v1/api/dypb001/list", method = RequestMethod.POST)
-	public ResponseEntity<List<Problem>> list() {
+	public ResponseEntity<ResponseDto> list() {
 		
-		return new ResponseEntity<>(dyPb001Service.findAll(), HttpStatus.OK);
+		ResponseDto responseDto = ResponseDto.builder()
+				.code(0)
+				.success(true)
+				.returnObject(dyPb001Service.findAll())
+				.build();
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
 	/**
@@ -36,32 +41,46 @@ public class DyPb001Controller {
 	 * @return
 	 */
 	@RequestMapping(value = "/v1/api/dypb001/get", method = RequestMethod.POST)
-	public ResponseEntity<Problem> get(@RequestBody Problem problem) {
+	public ResponseEntity<ResponseDto> get(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.get.problem : {}", problem);
 		
 		Optional<Problem> oProblem = dyPb001Service.findById(problem.getProblemNo());
 		if (oProblem.isEmpty()) {
-			return new ResponseEntity<Problem>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ResponseDto>(HttpStatus.BAD_REQUEST);
 		}
 		log.debug("oContest.get() : {}", oProblem.get());
-		return new ResponseEntity<>(oProblem.get(), HttpStatus.OK);
+		
+		ResponseDto responseDto = ResponseDto.builder()
+				.code(0)
+				.success(true)
+				.returnObject(oProblem.get())
+				.build();
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/v1/api/dypb001/save", method = RequestMethod.POST)
-	public ResponseEntity<Problem> save(@RequestBody Problem problem) {
+	public ResponseEntity<ResponseDto> save(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.save.problem : {}", problem);
 		
-		//dyPb001Service.save(contest);
-		
-		return new ResponseEntity<>(dyPb001Service.save(problem), HttpStatus.OK);
+		ResponseDto responseDto = ResponseDto.builder()
+				.code(0)
+				.success(true)
+				.returnObject(dyPb001Service.save(problem))
+				.build();
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/v1/api/dypb001/delete", method = RequestMethod.POST)
-	public ResponseEntity<Problem> delete(@RequestBody Problem problem) {
+	public ResponseEntity<ResponseDto> delete(@RequestBody Problem problem) {
 		log.debug("com.doo.academy.dy.pb.web.DyPb001Controller.delete.problem : {}", problem);
 		
 		dyPb001Service.delete(problem.getProblemNo());
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		ResponseDto responseDto = ResponseDto.builder()
+				.code(0)
+				.success(true)
+				// .returnObject(oProblem.get())
+				.build();
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 }
